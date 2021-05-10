@@ -55,7 +55,9 @@ class Shrey_Wholeseller_Adminhtml_WholesellerController extends Mage_Adminhtml_C
                 }
                 $wholeseller->setId($id);
             }
-            $wholeseller->addData($postData);
+            if(!$id){
+                $wholeseller->addData($postData);
+            }    
             $wholeseller->setJoinDate(Mage::getModel('core/date')->date('Y-m-d H:i:s'));
             $wholeseller->save();
             Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('wholeseller')->__('Wholeseller successfully saved.'));
