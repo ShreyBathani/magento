@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <adminhtml_wholeseller_index>
+        <reference name="content">
+            <block type="wholeseller/adminhtml_wholeseller" name="wholeseller_index"/>
+        </reference>
+    </adminhtml_wholeseller_index>
+    <adminhtml_wholeseller_edit>
+        <reference name="content">
+            <block type="wholeseller/adminhtml_wholeseller_edit" name="wholeseller_edit"/>
+        </reference>
+    </adminhtml_wholeseller_edit>
+</layout>

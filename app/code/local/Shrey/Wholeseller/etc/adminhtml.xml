@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <menu>
+        <wholeseller>
+            <title>Wholeseller</title>
+            <sort_order>100</sort_order>
+            <children>
+                <wholeseller>
+                    <title>Manage Wholeseller</title>
+                    <sort_order>0</sort_order>
+                    <action>*/wholeseller</action>
+                </wholeseller>
+            </children>
+        </wholeseller>
+    </menu>
+    <acl>
+        <resources>
+            <all>Allow Everything</all>
+        </resources>
+        <admin>
+            <children>
+                <wholeseller>
+                    <title>Wholeseller</title>
+                    <children>
+                        <wholeseller>
+                            <alert>Manage Wholeseller</alert>
+                        </wholeseller>
+                    </children>
+                </wholeseller>
+            </children>
+        </admin>
+    </acl>
+</config>
