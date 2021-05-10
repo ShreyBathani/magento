@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Cybercom_Practice1>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Cybercom_Practice1>
+    </modules>
+</config>
