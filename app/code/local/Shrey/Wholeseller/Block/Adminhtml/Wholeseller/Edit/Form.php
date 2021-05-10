@@ -28,7 +28,7 @@ class Shrey_Wholeseller_Block_Adminhtml_Wholeseller_Edit_Form extends Mage_Admin
             'name' => 'status',
             ]);
             
-        $fieldset->addField('address', 'text', [
+        $fieldset->addField('Address', 'text', [
             'label' => Mage::helper('wholeseller')->__('Address'),
             'class' => 'required-entry',
             'required' => true,
