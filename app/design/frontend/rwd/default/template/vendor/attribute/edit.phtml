@@ -1,0 +1,130 @@
+<?php 
+$attribute = $this->getAttribute();
+$inputOptions = $this->getInputOptions();
+$groups = $this->getGroups();
+$groupId = $attribute->getGroupId();
+/* echo "<pre>"; */
+
+$options = $attribute->getOptions();
+/* var_dump($options);
+die; */
+?>
+
+<div class="page-title">
+    <h3><?php echo $this->__('Add/Edit Attribute') ?></h3>
+</div>
+<hr>
+
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+
+<form action="<?php echo $this->getPostActionUrl() ?>"  method="post" id="form-validate" class="scaffold-form" enctype="multipart/form-data">
+    <div class="fieldset">
+        <!-- <input type="hidden" name="success_url" value="<?php //echo $this->getSuccessUrl() ?>" />
+        <input type="hidden" name="error_url" value="<?php //echo $this->getErrorUrl() ?>" /> -->
+        <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+        <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+        <ul class="form-list">
+            <li>
+                <label for="frontend_label" class="required"><em>*</em><?php echo $this->__('Label') ?></label>
+                <div class="input-box">
+                    <input type="text" autocapitalize="off" autocorrect="off" spellcheck="false" name="frontend_label[0]" required id="frontend_label" value="<?php echo $attribute->getFrontendLabel(); ?>" title="<?php echo $this->quoteEscape($this->__('Attribute Code')) ?>" class="input-text required-entry" />
+                </div>
+            </li>
+            
+            <li>
+                <label for="frontend_input" class="required"><em>*</em><?php echo $this->__('Frontend Input') ?></label>
+                <div class="input-box">
+                    <select  name="frontend_input" id="frontend_input" class="input-select required-entry" required onchange="showAddButton(this.value)" <?php if($attribute->getFrontendInput()){ echo "disabled"; } ?>>              
+                        <?php foreach($inputOptions as $key => $value): ?>
+                            <option value="<?php echo $key; ?>" <?php if($key == $attribute->getFrontendInput()){ echo "selected"; } ?> > <?php echo $value; ?> </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </li>
+            <?php if($attribute->getAttributeId()): ?>
+            <li>
+                <label for="group_id" class="required"><em>*</em><?php echo $this->__('Group') ?></label>
+                <div class="input-box">
+                    <select  name="group_id" id="group_id" class="input-select required-entry" required>              
+                        <option value="0" selected>No group</option>
+                        <?php if($groups): ?>
+                        <?php foreach($groups as $key => $value): ?>
+                            <option value="<?php echo $value['attribute_group_id']; ?>" <?php if($value['attribute_group_id'] == $groupId){ echo "selected"; } ?> > <?php echo $value['name']; ?> </option>
+                        <?php endforeach; ?>
+                        <?php endif; ?>
+                    </select>
+                </div>
+            </li>
+            <?php endif; ?>
+            <li>
+                <label for="frontend_input"><?php echo $this->__('Required Attribute') ?></label>
+                <input type="checkbox" name="is_required" id="is_required" value="1" class="input-check" <?php if($attribute->getIsRequired()){echo "checked";} ?>>
+            </li>
+        </ul>
+        
+        <div class="buttons-set" id="addbutton" style="display: none;">
+            <input type="button" value="<?php echo $this->quoteEscape($this->__('Add')) ?>" onclick="addRow()" class="button">
+        </div>
+        
+        <ul id="existOption">
+            <?php if($options): ?>
+            <?php foreach($options as $option): ?>
+            <li>
+                <div class="input-box">
+                    <input type="text" autocapitalize="off" autocorrect="off" spellcheck="false" required name="option[value][<?php echo $option['option_id']; ?>][0]" id="option_value" value="<?php echo $option['value']; ?>" title="<?php echo $this->quoteEscape($this->__('Attribute Option')) ?>" class="input-text required-entry" />
+                    <input type="text" autocapitalize="off" autocorrect="off" spellcheck="false" required name="option[order][<?php echo $option['option_id']; ?>]" id="option_order" value="<?php echo $option['sort_order']; ?>" title="<?php echo $this->quoteEscape($this->__('Sort Order')) ?>" class="input-text required-entry" />
+                    <!-- <buttton class="button button-danger" onclick="removeRow(this)">Remove</buttton> -->
+                </div>
+            </li>
+            <?php endforeach; ?>
+            <?php endif; ?>
+        </ul>
+    </div>
+    
+    <div class="buttons-set">
+        <!-- <p class="back-link"><a href="<?php //echo $this->escapeUrl($this->getBackUrl()) ?>" class="back-link"><small>&laquo; </small><?php //echo $this->__('Back') ?></a></p> -->
+        <button type="submit" title="<?php echo $this->quoteEscape($this->__('Save')) ?>" class="button"><span><span><?php echo $this->__('Save') ?></span></span></button>
+    </div>
+</form>
+
+<div style="display: none;">
+    <li id="newOptions">
+        <div class="input-box">
+            <input type="text" autocapitalize="off" autocorrect="off" spellcheck="false" required name="option[value][]" id="option_value" title="<?php echo $this->quoteEscape($this->__('Attribute Option')) ?>" class="input-text required-entry" />
+            <input type="text" autocapitalize="off" autocorrect="off" spellcheck="false" required name="option[order][]" id="option_order" title="<?php echo $this->quoteEscape($this->__('Sort Order')) ?>" class="input-text required-entry" />
+            <buttton class="button button-danger" onclick="removeRow(this)">Remove</buttton>
+        </div>
+    </li>
+</div>
+
+<script>
+    var cnt = 0;
+    function showAddButton(value) {
+        if (value == 'select' || value == 'multiselect') {
+            document.getElementById('addbutton').style.display = "block";
+        }
+        else{
+            document.getElementById('addbutton').style.display = "none";
+        }
+    }
+    function addRow() {
+        newRow = document.getElementById('newOptions').cloneNode(true);
+        //newRow = document.getElementById('newOptions');
+        //row = newRow.getElementById('option_value');
+        name = "option[value][option_" + cnt +"][0]";
+        order = "option[order][option_" + cnt +"]";
+        newRow.children[0].children[0].setAttribute("name", name);
+        newRow.children[0].children[1].setAttribute("name", order);
+        //newRow.children[0].children[0].setAttribute("value", '');
+        console.log(newRow);
+        document.getElementById('existOption').prepend(newRow);
+        cnt++;
+    }
+
+    function removeRow(button) {
+        button.parentNode.parentNode.remove();
+    }
+
+    var value = '<?php echo $attribute->getFrontendInput(); ?>';
+    showAddButton(value);
+</script>

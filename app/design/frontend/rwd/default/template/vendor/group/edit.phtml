@@ -1,0 +1,25 @@
+<?php $group = $this->getGroup(); ?>
+
+<div class="page-title">
+    <h1><?php echo $this->__('Group Information') ?></h1>
+</div>
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+<form action="<?php echo $this->getSaveUrl(); ?>" method="post" id="form-validate" autocomplete="off">
+    <div class="fieldset">
+        <?php echo $this->getBlockHtml('formkey')?>
+        
+        <ul class="form-list">
+            <li>
+                <label for="name" class="required"><em>*</em><?php echo $this->__('Group Name') ?></label>
+                <div class="input-box">
+                    <input type="text" name="name" id="name" value="<?php echo $group->getName(); ?>" title="<?php echo Mage::helper('vendor')->quoteEscape($this->__('Group Name')) ?>" class="input-text required-entry" />
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="buttons-set">
+        <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+        <!-- <p class="back-link"><a href="<?php //echo $this->escapeUrl($this->getBackUrl()) ?>"><small>&laquo; </small><?php //echo $this->__('Back') ?></a></p> -->
+        <button type="submit" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Save')) ?>" class="button"><span><span><?php echo $this->__('Save') ?></span></span></button>
+    </div>
+</form>

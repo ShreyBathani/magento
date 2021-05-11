@@ -1,0 +1,43 @@
+<?php $groups = $this->getCollection(); ?>
+<?php 
+/* echo "<pre>";
+print_r($groups);
+die; */
+
+?>
+<div class="page-title">
+    <h3><?php echo $this->__('Manage Groups') ?></h3>
+</div>
+<hr>
+
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+
+<div class="button-set">
+    <a href="<?php echo $this->getAddNewUrl(); ?>" class="button float-right">Add New</a>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if($groups->getData()): ?>
+        <?php foreach($groups as $group): ?>
+        <tr>
+            <td><?php echo $group->getEntityId(); ?></td>
+            <td><?php echo $group->getName(); ?></td>
+            <td><a class="button" href="<?php echo $this->getEditUrl($group->getEntityId()); ?>">Edit</a>
+            <a class="button" href="<?php echo $this->getDeleteUrl($group->getEntityId()); ?>">Delete</a></td>
+        </tr>
+        <?php endforeach; ?>
+        <?php else: ?>
+        <tr>
+            <td colspan="3">No Groups Available</td>
+        </tr>
+        <?php endif; ?>
+    </tbody>
+</table>

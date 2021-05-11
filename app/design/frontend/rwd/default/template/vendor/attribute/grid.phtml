@@ -1,0 +1,46 @@
+<?php $attributes = $this->getCollection(); ?>
+<?php 
+/*echo "<pre>";
+print_r($attributes->getData());
+die; */
+
+?>
+</pre>
+<div class="page-title">
+    <h3><?php echo $this->__('Manage Attribute') ?></h3>
+</div>
+<hr>
+
+<?php echo $this->getMessagesBlock()->toHtml() ?>
+
+<div class="button-set">
+    <a href="<?php echo $this->getAddNewUrl(); ?>" class="button float-right">Add New</a>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Input Type</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if($attributes->getData()): ?>
+        <?php foreach($attributes as $attribute): ?>
+        <tr>
+            <td><?php echo $attribute->getAttributeId() ?></td>
+            <td><?php echo $attribute->getFrontendLabel() ?></td>
+            <td><?php echo $attribute->getFrontendInput() ?></td>
+            <td><a class="button" href="<?php echo $this->getEditUrl($attribute->getAttributeId()) ?>">Edit</a>
+            <a class="button" href="<?php echo $this->getDeleteUrl($attribute->getAttributeId()) ?>">Delete</a></td>
+        </tr>
+        <?php endforeach; ?>
+        <?php else: ?>
+        <tr>
+            <td colspan="3">No Attributes Available</td>
+        </tr>
+        <?php endif; ?>
+    </tbody>
+</table>

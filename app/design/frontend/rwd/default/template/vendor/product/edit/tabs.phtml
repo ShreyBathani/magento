@@ -1,0 +1,14 @@
+<?php $tabs = $this->getTabs(); ?>
+<div class="tab">
+    <?php foreach($tabs as $key => $value): ?>
+        
+        <button type="button" class="tablinks btn btn-outline-dark col-8 mb-2" onclick="changeTab(event, '<?php echo $key ?>')" id="<?php echo $key.'Tab' ?>"><?php echo $value ?></button>
+    <?php endforeach; ?>
+  <!-- <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button> -->
+</div>
+
+<script>-
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("GeneralTab").click();
+</script>
