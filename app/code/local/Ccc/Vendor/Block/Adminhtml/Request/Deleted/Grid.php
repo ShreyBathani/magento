@@ -145,26 +145,26 @@ class Ccc_Vendor_Block_Adminhtml_Request_Deleted_Grid extends Mage_Adminhtml_Blo
                 'index'     => 'stores',
         ));
 
-        $this->addColumn('view',
-            array(
-                'header'    => Mage::helper('vendor')->__('Action'),
-                'width'     => '50px',
-                'type'      => 'action',
-                'getter'     => 'getId',
-                'actions'   => array(
-                    array(
-                        'caption' => Mage::helper('vendor')->__('View'),
-                        'url'     => array(
-                            'base'=>'*/*/view',
-                            'params'=>array('store'=>$this->getRequest()->getParam('store'))
-                        ),
-                        'field'   => 'id'
-                    )
-                ),
-                'filter'    => false,
-                'sortable'  => false,
-                'index'     => 'stores',
-        ));
+        // $this->addColumn('view',
+        //     array(
+        //         'header'    => Mage::helper('vendor')->__('Action'),
+        //         'width'     => '50px',
+        //         'type'      => 'action',
+        //         'getter'     => 'getId',
+        //         'actions'   => array(
+        //             array(
+        //                 'caption' => Mage::helper('vendor')->__('View'),
+        //                 'url'     => array(
+        //                     'base'=>'*/*/view',
+        //                     'params'=>array('store'=>$this->getRequest()->getParam('store'))
+        //                 ),
+        //                 'field'   => 'id'
+        //             )
+        //         ),
+        //         'filter'    => false,
+        //         'sortable'  => false,
+        //         'index'     => 'stores',
+        // ));
 
         parent::_prepareColumns();
         return $this;
