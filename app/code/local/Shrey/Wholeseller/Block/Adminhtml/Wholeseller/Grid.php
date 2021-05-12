@@ -42,7 +42,7 @@ class Shrey_Wholeseller_Block_Adminhtml_Wholeseller_Grid extends Mage_Adminhtml_
         ]);
 
         $this->addColumn('join_date', [
-            'header' => Mage::helper('wholeseller')->__('Joining Data'),
+            'header' => Mage::helper('wholeseller')->__('Joining Date'),
             'index' => 'join_date',
             'type' => 'datetime',
         ]);
