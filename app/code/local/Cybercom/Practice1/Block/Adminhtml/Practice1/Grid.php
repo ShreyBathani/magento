@@ -5,12 +5,13 @@ use function PHPSTORM_META\type;
 class Cybercom_Practice1_Block_Adminhtml_Practice1_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
     public function __construct() {
-        parent::__construct();
         $this->setId('practice1Grid');
         $this->setDefaultSort('entity_id');
         $this->setDefaultDir('Asc');
         $this->setSaveParametersInSession(true);
         $this->setUseAjax(true);
+        $this->setVarNameFilter('practice1_filter');
+        parent::__construct();
     }
 
     public function _getStore()
