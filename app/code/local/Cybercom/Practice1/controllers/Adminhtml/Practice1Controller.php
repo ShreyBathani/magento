@@ -77,7 +77,7 @@ class Cybercom_Practice1_Adminhtml_Practice1Controller extends Mage_Adminhtml_Co
             $practice1->addData($practice1Data);
             $practice1->save();
 
-            Mage::getSingleton('core/session')->addSuccess("Vendor data added.");
+            Mage::getSingleton('core/session')->addSuccess("Practice data added.");
             $this->_redirect('*/*/');
 
         } catch (Exception $e) {

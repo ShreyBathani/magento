@@ -154,7 +154,6 @@ class Cybercom_Practice1_Block_Adminhtml_Practice1_Attribute_Set_Main extends Ma
 
             $nodeChildren = Mage::getResourceModel('practice1/practice1_attribute_collection')
                 ->setAttributeGroupFilter($node->getId())
-                ->checkConfigurableProducts()
                 ->load();
 
             if ($nodeChildren->getSize() > 0) {
@@ -225,7 +224,7 @@ class Cybercom_Practice1_Block_Adminhtml_Practice1_Attribute_Set_Main extends Ma
 
         if (count($items) == 0) {
             $items[] = array(
-                'text'      => Mage::helper('vendor')->__('Empty'),
+                'text'      => Mage::helper('practice1')->__('Empty'),
                 'id'        => 'empty',
                 'cls'       => 'folder',
                 'allowDrop' => false,
