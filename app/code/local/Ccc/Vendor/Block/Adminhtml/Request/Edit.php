@@ -8,5 +8,6 @@ class Ccc_Vendor_Block_Adminhtml_Request_Edit extends Mage_Adminhtml_Block_Widge
         $this->_controller = 'adminhtml_request_edit';
         $this->_headerText = $this->__('Edited Vendor Product');
         parent::__construct();
+        $this->_removeButton('add');
     }
 }

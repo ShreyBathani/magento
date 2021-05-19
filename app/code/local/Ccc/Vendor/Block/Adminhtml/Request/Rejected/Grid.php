@@ -3,13 +3,13 @@
 class Ccc_Vendor_Block_Adminhtml_Request_Rejected_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
     public function __construct() {
-        parent::__construct();
         $this->setId('vendorProductId');
         $this->setDefaultSort('entity_id');
         $this->setDefaultDir('DESC');
         $this->setSaveParametersInSession(true);
         $this->setUseAjax(true);
         $this->setVarNameFilter('rejecteded_vendor_product_filter');
+        parent::__construct();
     }
 
     protected function _getStore()

@@ -109,13 +109,12 @@ die; */
     }
     function addRow() {
         newRow = document.getElementById('newOptions').cloneNode(true);
-        //newRow = document.getElementById('newOptions');
-        //row = newRow.getElementById('option_value');
         name = "option[value][option_" + cnt +"][0]";
         order = "option[order][option_" + cnt +"]";
         newRow.children[0].children[0].setAttribute("name", name);
         newRow.children[0].children[1].setAttribute("name", order);
-        //newRow.children[0].children[0].setAttribute("value", '');
+        newRow.children[0].children[0].value = "";
+        newRow.children[0].children[1].value = "";
         console.log(newRow);
         document.getElementById('existOption').prepend(newRow);
         cnt++;

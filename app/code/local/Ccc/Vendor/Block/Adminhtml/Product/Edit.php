@@ -7,8 +7,8 @@ class Ccc_Vendor_Block_Adminhtml_Product_Edit extends Mage_Adminhtml_Block_Widge
         $this->_objectId = 'id';
         $this->_blockGroup = 'vendor';
         $this->_controller = 'adminhtml_product';
-        $this->_updateButton('save', 'label', Mage::helper('vendor')->__('Save Product'));
         $this->_updateButton('delete', 'label', Mage::helper('vendor')->__('Delete Product'));
+        $this->_removeButton('save');
     }
 
     public function getHeaderText()

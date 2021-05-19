@@ -16,8 +16,8 @@
       <?php break;
     case 'select': ?>
     <span class="form_row">
-        <?php if($element->getLabel()): ?><label for="<?php echo $element->getHtmlId() ?>"><?php echo $element->getLabel() ?>:</label><?php endif; ?>
-        <select name="<?php echo $element->getName() ?>" id="<?php echo $element->getHtmlId() ?>" class="form-control select<?php echo $element->getClass() ?>" title="<?php echo $element->getTitle() ?>">
+        <?php if($element->getLabel()): ?><label for="<?php echo $element->getHtmlId() ?>" <?php if($element->getRequired()): ?> class="required" <?php endif; ?>><?php if($element->getRequired()): ?><em>*</em><?php endif; ?><?php echo $element->getLabel() ?>:</label><?php endif; ?>
+        <select name="<?php echo $element->getName() ?>" id="<?php echo $element->getHtmlId() ?>" class="form-control select<?php echo $element->getClass() ?>" title="<?php echo $element->getTitle() ?>" <?php if($element->getRequired()){ echo "required"; } ?>>
         <?php foreach ($element->getValues() as $_value): ?>
             <option value="<?php echo $_value['value']  ?>" <?php if($_value['value'] == $element->getValue()): ?> selected="selected"<?php endif; ?>><?php echo $_value['label'] ?></option>
 
@@ -29,8 +29,8 @@
     case 'button':
     case 'password': ?>
     <span class="form_row">
-        <?php if($element->getLabel()): ?><label for="<?php echo $element->getHtmlId() ?>"><?php echo $element->getLabel() ?>:</label><?php endif; ?>
-        <input type="<?php echo $element->getType() ?>" name="<?php echo $element->getName() ?>" id="<?php echo $element->getHtmlId() ?>" value="<?php echo $element->getValue() ?>" class="form-control input-text <?php echo $element->getClass() ?>" title="<?php echo $element->getTitle() ?>" <?php echo ( $element->getOnClick() ? 'onClick="'.$element->getOnClick().'"' : '' ) ?>/>
+        <?php if($element->getLabel()): ?><label for="<?php echo $element->getHtmlId() ?>" <?php if($element->getRequired()): ?> class="required" <?php endif; ?>><?php if($element->getRequired()): ?><em>*</em><?php endif; ?><?php echo $element->getLabel() ?>:</label><?php endif; ?>
+        <input type="<?php echo $element->getType() ?>" name="<?php echo $element->getName() ?>" id="<?php echo $element->getHtmlId() ?>" value="<?php echo $element->getValue() ?>" class="form-control input-text <?php echo $element->getClass() ?>" title="<?php echo $element->getTitle() ?>" <?php echo ( $element->getOnClick() ? 'onClick="'.$element->getOnClick().'"' : '' ) ?> <?php if($element->getRequired()){ echo "required"; } ?>/>
     </span>
       <?php break;
     case 'radio': ?>
@@ -82,17 +82,22 @@
       <textarea name="<?php echo $element->getName() ?>" title="<?php echo $element->getTitle() ?>" id="<?php echo $element->getHtmlId() ?>" class="textarea <?php echo $element->getClass() ?>" cols="80" rows="20"><?php echo $element->getValue(); ?></textarea>
     </span>
       <?php break;
-        case 'textarea': ?>
-            <span class="form_row">
-                    <label for="<?php echo $element->getHtmlId() ?>"><?php echo $element->getLabel() ?>:</label>
-                    <textarea name="<?php echo $element->getName() ?>" title="<?php echo $element->getTitle() ?>" id="<?php echo $element->getHtmlId() ?>" class="form-control textarea <?php echo $element->getClass() ?>" cols="15" rows="2"><?php echo $element->getValue(); ?></textarea>
-            </span>
+    case 'textarea': ?>
+        <span class="form_row">
+                <label for="<?php echo $element->getHtmlId() ?>" <?php if($element->getRequired()): ?> class="required" <?php endif; ?>><?php if($element->getRequired()): ?><em>*</em><?php endif; ?><?php echo $element->getLabel() ?>:</label>
+                <textarea name="<?php echo $element->getName() ?>" title="<?php echo $element->getTitle() ?>" id="<?php echo $element->getHtmlId() ?>" class="form-control textarea <?php echo $element->getClass() ?>" cols="15" rows="2" <?php if($element->getRequired()){ echo "required"; } ?>><?php echo $element->getValue(); ?></textarea>
+        </span>
       <?php break;
     case 'editor': ?>
       <?php break;
     case 'file': ?>
       <?php break;
     case 'checkbox': ?>
+      <?php break;
+    case 'price':
+    case 'weight': ?>
+        <?php if($element->getLabel()): ?><label for="<?php echo $element->getHtmlId() ?>" <?php if($element->getRequired()): ?> class="required" <?php endif; ?>><?php if($element->getRequired()): ?><em>*</em><?php endif; ?><?php echo $element->getLabel() ?>:</label><?php endif; ?>
+          <input type="number" name="<?php echo $element->getName() ?>" id="<?php echo $element->getHtmlId() ?>" value="<?php echo $element->getValue() ?>" class="form-control input-text <?php echo $element->getClass() ?>" title="<?php echo $element->getTitle() ?>" <?php echo ( $element->getOnClick() ? 'onClick="'.$element->getOnClick().'"' : '' ) ?>  <?php if($element->getRequired()){ echo "required"; } ?>>
       <?php break;
 } ?>
 <?php if($element->getScript()): ?>

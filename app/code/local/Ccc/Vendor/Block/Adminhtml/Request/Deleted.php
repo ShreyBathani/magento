@@ -8,5 +8,6 @@ class Ccc_Vendor_Block_Adminhtml_Request_Deleted extends Mage_Adminhtml_Block_Wi
         $this->_controller = 'adminhtml_request_deleted';
         $this->_headerText = $this->__('Deleted Vendor Product');
         parent::__construct();
+        $this->_removeButton('add');
     }
 }
