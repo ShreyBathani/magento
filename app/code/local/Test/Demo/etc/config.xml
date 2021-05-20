@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <test_demo>
+            <version>1.0.0</version>
+        </test_demo>
+    </modules>
+    <global>
+        <models>
+            <demo>
+                <class>Test_Demo_Model</class>
+            </demo>
+        </models>
+        <helpers>
+            <demo>
+                <class>Test_Demo_Helper</class>
+            </demo>
+        </helpers>
+        <blocks>
+            <demo>
+                <class>Test_Demo_Block</class>
+            </demo>
+        </blocks>
+    </global>
+    <default>
+        <payment>
+            <cod>
+                <active>1</active>
+                <model>demo/cod</model>
+                <order_status>pending</order_status>
+                <title>Custom Cod</title>
+                <allowspecific>0</allowspecific>
+                <group>offline</group>
+            </cod>
+        </payment>
+    </default>
+    <frontend>
+        <routers>
+            <demo>
+                <use>standard</use>
+                <args>
+                    <module>Test_Demo</module>
+                    <frontname>customcard</frontname>
+                </args>
+            </demo>
+        </routers>
+    </frontend>
+</config>
