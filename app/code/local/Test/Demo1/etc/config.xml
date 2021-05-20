@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Test_Demo1>
+            <version>1.0.0</version>
+        </Test_Demo1>
+    </modules>
+
+    <global>
+        <models>
+            <demo1>
+                <class>Test_Demo1_Model</class>
+            </demo1>
+        </models>
+        <helpers>
+            <demo1>
+                <class>Test_Demo1_Helper</class>
+            </demo1>
+
+        </helpers>
+        <blocks>
+            <demo1>
+                <class>Test_Demo_Block</class>
+            </demo1>
+        </blocks>
+    </global>
+
+    <default>
+        <carriers>
+            <demo1>
+                <active>1</active>
+                <model>demo1/carrier</model>
+                <title>Express Delivery</title>
+                <sort_order>10</sort_order>
+                <sallowspecific>0</sallowspecific>
+            </demo1>
+        </carriers>
+    </default>
+
+    <frontend>
+        <routers>
+            <demo1>
+                <use>standard</use>
+                <args>
+                    <module>Test_Demo1</module>
+                    <frontname>demo1</frontname>
+                </args>
+            </demo1>
+        </routers>
+    </frontend>
+</config>
