@@ -69,8 +69,17 @@ class Ccc_Vendor_Block_Adminhtml_Request_New_Grid extends Mage_Adminhtml_Block_W
             $adminStore
         );
 
-        $collection->addAttributeToFilter('vendor_product_request_status', ['=' => Ccc_Vendor_Model_Product_Request::REQUEST_ADD])
-                    ->addAttributeToFilter('vendor_product_approved', ['=' => Ccc_Vendor_Model_Product_Request::REQUEST_PENDING]);
+        $collection->joinAttribute(
+            'vendor_product_approved',
+            'vendor_product/vendor_product_approved',
+            'entity_id',
+            null,
+            'left',
+            $adminStore
+        );
+
+        $collection->addAttributeToFilter('vendor_product_request_status', ['=' => Ccc_Vendor_Model_Product_Request::REQUEST_ADD]);
+                    //->addAttributeToFilter('vendor_product_approved', ['=' => Ccc_Vendor_Model_Product_Request::REQUEST_PENDING]);
         
         $this->setCollection($collection);
         return parent::_prepareCollection();
@@ -101,6 +110,11 @@ class Ccc_Vendor_Block_Adminhtml_Request_New_Grid extends Mage_Adminhtml_Block_W
         $this->addColumn('price', array(
             'header' => Mage::helper('vendor')->__('Price'),
             'index'  => 'price',
+        ));
+
+        $this->addColumn('vendor_product_approved', array(
+            'header' => Mage::helper('vendor')->__('Status'),
+            'index'  => 'vendor_product_approved',
         ));
 
         $this->addColumn('approve',
