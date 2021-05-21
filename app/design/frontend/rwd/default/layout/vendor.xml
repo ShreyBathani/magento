@@ -4,9 +4,9 @@
     
     <default>
         <reference name="top.links">
-            <action method="addLink" translate="label title" module="vendor"><label>Vendor Account</label><url helper="vendor/getAccountUrl"/><title>Vendor Account</title><prepare/><urlParams/><position>180</position></action>
-            <action method="addLink" translate="label title before_text" module="vendor"><label>Vendor Register</label><url helper="vendor/getRegisterUrl" /><title>Vendor Register</title><prepare/><urlParams/><position>190</position><li/><a/></action>
-            <action method="addLink" translate="label title before_text" module="vendor"><label>Vendor Logout</label><url helper="vendor/getLogoutUrl" /><title>Vendor Logout</title><prepare/><urlParams/><position>190</position><li/><a/></action>
+            <action method="addLink" translate="label title" module="vendor"><label>Vendor Account</label><url helper="vendor/getAccountUrl"/><title>Vendor Account</title><prepare/><urlParams/><position>110</position></action>
+            <action method="addLink" translate="label title before_text" module="vendor"><label>Vendor Register</label><url helper="vendor/getRegisterUrl" /><title>Vendor Register</title><prepare/><urlParams/><position>120</position><li/><a/></action>
+            <!-- <action method="addLink" translate="label title before_text" module="vendor"><label>Vendor Logout</label><url helper="vendor/getLogoutUrl" /><title>Vendor Logout</title><prepare/><urlParams/><position>190</position><li/><a/></action> -->
         </reference>
     </default>
 
@@ -59,6 +59,39 @@
             <action method="unsetChild"><name>left.permanent.callout</name></action>
         </reference>
     </vendor_account_edit>
+    
+    <vendor_logged_in>
+        <reference name="top.links">
+            <action method="addLink" translate="label title" module="vendor">
+                <label>Vendor Log Out</label>
+                <url helper="vendor/getLogoutUrl" />
+                <title>Vendor Log Out</title>
+                <prepare />
+                <urlParams />
+                <position>130</position>
+            </action>
+            <action method="removeLinkByUrl">
+                <url helper="customer/getLoginUrl" />
+            </action>
+        </reference>
+    </vendor_logged_in>
+
+    <vendor_logged_out>
+        <reference name="top.links">
+
+            <action method="addLink" translate="label title" module="vendor">
+                <label>Vendor Log In</label>
+                <url helper="vendor/getLoginUrl" />
+                <title>Vendor Log In</title>
+                <prepare />
+                <urlParams />
+                <position>130</position>
+            </action>
+            <action method="removeLinkByUrl">
+                <url helper="customer/getLoginUrl" />
+            </action>
+        </reference>
+    </vendor_logged_out>
     
     <!-- Vendor account pages, rendered for all tabs in dashboard -->
     

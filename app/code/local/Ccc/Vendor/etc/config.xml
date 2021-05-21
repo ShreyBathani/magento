@@ -44,6 +44,14 @@
   	</adminhtml>
 	<global>
 		<events>
+			<controller_action_layout_load_before>
+                <observers>
+                    <vendor_is_logged_in_observer>
+                        <class>vendor/observer</class>
+                        <method>beforeLoadLayout</method>
+                    </vendor_is_logged_in_observer>
+                </observers>
+            </controller_action_layout_load_before>
 			<sales_order_place_after>
 				<observers>
 					<set_vendor_id_in_sales>

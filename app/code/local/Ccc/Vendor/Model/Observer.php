@@ -2,6 +2,14 @@
 
 class Ccc_Vendor_Model_Observer 
 {
+    public function beforeLoadLayout($observer)
+    {
+        $loggedIn = Mage::getSingleton('vendor/session')->isLoggedIn();
+
+        $observer->getEvent()->getLayout()->getUpdate()
+            ->addHandle('vendor_logged_' . ($loggedIn ? 'in' : 'out'));
+    }
+    
     public function addVendorIdInOrderItem($observer)
     {
         $order = $observer->getEvent()->getOrder();
@@ -13,6 +21,5 @@ class Ccc_Vendor_Model_Observer
                 $item->save();
             }
         }
-        Mage::log($order->debug(), Zend_Log::DEBUG, 'hello.txt', true);
     }
 }
