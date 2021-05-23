@@ -14,7 +14,7 @@
         </tr>
     </thead>
     <tbody>
-        <?php if($orderProducts): ?>
+        <?php if($orderProducts->getData()): ?>
         <?php foreach($orderProducts as $orderProduct):?>
         <tr>
             <td><?php echo $orderProduct->getId(); ?></td>
@@ -25,7 +25,7 @@
         <?php endforeach; ?>
         <?php else: ?>
         <tr>
-            <td colspan="3">No Order Available</td>
+            <td colspan="4">No Order Available</td>
         </tr>
         <?php endif; ?>
     </tbody>

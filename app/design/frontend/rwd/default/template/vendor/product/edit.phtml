@@ -44,5 +44,26 @@
         document.getElementById(cityName).style.display = "block";
         evt.currentTarget.className += " active";
     }
+
+function checkDetails() {
+    flag = 0;
+    jQuery("input,select,textarea").each(function() {
+        if (jQuery(this).attr("id") == 'required') {
+            if (jQuery(this).val() == "" || jQuery(this).val() == undefined) {
+                //ptag = jQuery(this).parent().prev().children()[0];
+                ptag = jQuery(this).parent().children()[0];
+                console.log(ptag);
+                alert("Please Fill " + jQuery(ptag).text().trim().slice(1, -1) + " value");
+                flag = 1;
+                return false;
+            }
+        }
+    });
+    if (flag) {
+        return false;
+    } else {
+        jQuery("#productForm").submit();
+    }
+}
     
 </script>
