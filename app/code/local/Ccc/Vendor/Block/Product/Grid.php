@@ -81,6 +81,7 @@ class Ccc_Vendor_Block_Product_Grid extends Mage_Core_Block_Template
         );
 
         $collection->addAttributeToFilter('vendor_id', ['eq' => $this->getVendor()->getId()])
+            ->addAttributeToSort('entity_id', 'ASC')
             ->addAttributeToFilter('vendor_product_request_status', ['neq' => Ccc_Vendor_Model_Product_Request::REQUEST_DELETED]);
         $this->setCollection($collection);
         

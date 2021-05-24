@@ -32,8 +32,8 @@ die; */
             <td><?php echo $vendorProduct->getName(); ?></td>
             <td><?php echo $vendorProduct->getSku(); ?></td>
             <td><?php echo $vendorProduct->getPrice(); ?></td>
-            <td><?php echo $vendorProduct->getVendorProductApproved(); ?></td>
             <td><?php echo $vendorProduct->getWeight(); ?></td>
+            <td><?php echo $vendorProduct->getVendorProductApproved(); ?></td>
             <td><a class="button" href="<?php echo $this->getEditUrl($vendorProduct->getEntityId()); ?>">Edit</a>
             <a class="button" href="<?php echo $this->getDeleteUrl($vendorProduct->getEntityId()); ?>">Delete</a></td>
         </tr>

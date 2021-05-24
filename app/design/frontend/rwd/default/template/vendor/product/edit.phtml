@@ -1,6 +1,6 @@
 <?php $groupAttributes = $this->getGroupAttributes(); ?>
 
-<form method="post" action="<?php echo $this->getSaveUrl() ?>" enctype="multipart/form-data">
+<form method="post" id="productForm" action="<?php echo $this->getSaveUrl() ?>" enctype="multipart/form-data">
 
     <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
 
