@@ -7,8 +7,8 @@ class Ccc_Vendor_Model_Observer
         $order = $observer->getEvent()->getOrder();
         foreach ($order->getItemsCollection() as $item) {
             $vendorProduct = Mage::getModel('vendor/product')->loadByAttribute('sku', $item->getSku());
-            $vendorProduct = Mage::getModel('vendor/product')->load($vendorProduct->getEntityId());
             if($vendorProduct){
+                $vendorProduct = Mage::getModel('vendor/product')->load($vendorProduct->getEntityId());
                 if ($vendorProduct->getVendorId()) {
                     $item->setVendorId($vendorProduct->getVendorId());
                     $item->save();
