@@ -59,6 +59,16 @@ function checkDetails() {
             }
         }
     });
+    jQuery("input").each(function() {
+        if (jQuery(this).attr("type") == 'number') {
+            if (jQuery(this).val() < 0) {
+                ptag = jQuery(this).parent().children()[0];
+                alert(jQuery(ptag).text().trim().slice(1, -1) + " Value must be positive value ");
+                flag = 1;
+                return false;
+            }
+        }
+    });
     if (flag) {
         return false;
     } else {

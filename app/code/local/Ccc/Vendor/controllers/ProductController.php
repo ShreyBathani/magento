@@ -79,8 +79,14 @@ class Ccc_Vendor_ProductController extends Mage_Core_Controller_Front_Action
             }
 
             $product->setVendorProductApproved(Ccc_Vendor_Model_Product_Request::REQUEST_PENDING);
+            if ($product->getSku() != $productData['sku']) {
+                if ($product->loadBySku($productData['sku'])) {
+                    echo 1;
+                    //die;
+                    throw new Mage_Core_Exception("This SKU is already in product.");
+                }
+            }
             $product->addData($productData);
-            
             $product->save();
 
             $this->_getSession()->addSuccess("Product data added.");
