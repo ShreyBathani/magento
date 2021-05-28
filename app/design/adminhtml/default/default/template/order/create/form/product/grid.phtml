@@ -1,0 +1,39 @@
+<?php
+$buttons = $this->getButtonsHtml();
+$collection = $this->getCollection();
+$columns = $this->getColumns();
+//echo "<pre>";
+
+?>
+
+<div class="grid">
+    <div class="hor-scroll">
+        <table cellspacing="0" class="data">
+            <?php foreach ($columns as $key => $column) : ?>
+                <col width="<?php echo $column['width'] ?>" />
+            <?php endforeach; ?>
+                <col width="50" />
+            <thead>
+                <tr class="headings">
+                    <?php foreach ($columns as $key => $column) : ?>
+                        <th><span class="nobr"><a href="#" name="<?php echo $key ?>" title="asc" class="not-sort"><span class="sort-title"><?php echo $column['header'] ?></span></a></span></th>
+                    <?php endforeach; ?>
+                        <th><span class="nobr"><span class="sort-title">Select</span></span></th>
+                </tr>
+            </thead>
+
+            <tbody>
+            <?php foreach ($collection as $row): ?>
+                <tr title="#">
+                    <td class=" "> <?php echo $row->getId() ?> </td>
+                    <td class=" "> <?php echo $row->getName() ?> </td>
+                    <td class=" "> <?php echo $row->getSku() ?> </td>
+                    <td class=" "> <?php echo $row->getPrice() ?> </td>
+                    <td class="a-center "><input type="checkbox" name="product" value="<?php echo $row->getId() ?>" class="massaction-checkbox"/></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+
+        </table>
+    </div>
+</div>

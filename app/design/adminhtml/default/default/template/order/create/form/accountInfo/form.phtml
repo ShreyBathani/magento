@@ -1,0 +1,26 @@
+<?php $groups = $this->getGroups(); ?>
+<?php $cart = $this->getCart(); ?>
+<div class="hor-scroll">
+    <table cellspacing="0" class="form-list">
+        <tbody>
+            <tr>
+                <td class="label"><label for="first_name">First Name <span class="required">*</span></label></td>
+                <td class="value"><?php echo $cart->getFirstName() ?>
+                    <!-- <input id="name" name="first_name" value="<?php //echo $cart->getFirstName() ?>" class="required-entry input-text required-entry" type="text" required/> -->
+                </td>
+            </tr>
+            <tr>
+                <td class="label"><label for="last_name">Last Name <span class="required">*</span></label></td>
+                <td class="value"><?php echo $cart->getLastName() ?>
+                    <!-- <input id="name" name="last_name" value="<?php //echo $cart->getLastName() ?>" class="required-entry input-text required-entry" type="text" required/> -->
+                </td>
+            </tr>
+            <tr>
+                <td class="label"><label for="email">Email <span class="required">*</span></label></td>
+                <td class="value"><?php echo $cart->getEmail() ?>
+                    <!-- <input id="email" name="email" value="<?php //echo $cart->getEmail() ?>" class="validate-email required-entry input-text required-entry" type="email" required /> -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

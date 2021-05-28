@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <menu>
+        <order>
+            <title>Order</title>
+            <sort_order>121</sort_order>
+            <children>
+                <order>
+                    <title>Manage Order</title>
+                    <action>*/order</action>
+                </order>
+            </children>
+        </order>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <order translate="title">
+                        <title>Order</title>
+                        <children>
+                            <alert translate="title">
+                                <title>Manage Order</title>
+                            </alert>
+                        </children>
+                    </order>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

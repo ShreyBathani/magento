@@ -1,0 +1,12 @@
+<div class="entry-edit">
+    <form action="<?php echo $this->getFormUrl() ?>" id="cart_item" method="POST">
+    <?php echo $this->getBlockHtml('formkey'); ?>
+    <div class="entry-edit-head">
+        <div style="float: right;"><button title="Update" type="submit" class="scalable add" ><span><span><span>Update</span></span></span></button></div>
+        <h4 class="fieldset-legend <?php echo ($this->getHeaderCssClass()) ? $this->getHeaderCssClass().' icon-head' : '' ?>"><?php echo $this->getHeaderText() ?></h4>
+    </div>
+    <div class="fieldset">
+        <?php echo $this->getChildHtml('orderItemsGrid', true, true) ?>
+    </div>
+    </form>
+</div>

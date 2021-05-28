@@ -1,0 +1,55 @@
+<!-- <script type="text/javascript">
+    var order = new AdminOrder(<?php //echo $this->getOrderDataJson() ?>);
+    order.setLoadBaseUrl('<?php //echo $this->getLoadBlockUrl() ?>');
+    var payment = {};
+    payment.switchMethod = order.switchPaymentMethod.bind(order);
+</script> -->
+<div style="float: left">
+    <h3><?php echo $this->getHeaderText(); ?></h3>
+</div>
+
+<div style="float: right">
+<button title="Submit Order" type="button" class="scalable save" onclick="setLocation('<?php echo $this->getUrl('*/order/submitOrder', ['_current' => true]) ?>')"><span><span><span>Submit Order</span></span></span></button>
+</div>
+<br><br>
+<div>
+    <?php echo $this->getChildHtml('product'); ?>
+</div>
+
+<div>
+    <?php echo $this->getChildHtml('orderItems'); ?>
+</div>
+
+<div>
+    <?php echo $this->getChildHtml('accountInfo'); ?>
+</div>
+
+<!-- <div style="width: 49%; float: left;">
+    <?php //echo $this->getChildHtml('billingAddress'); ?>
+</div>
+
+<div style="width: 49%; float: right;">
+    <?php //echo $this->getChildHtml('shippingAddress'); ?>
+</div> -->
+
+<div style=" display: flex; margin-top:20px;">
+    <div style="margin-right:10px; width: 100%;">
+        <?php echo $this->getChildHtml('billingAddress'); ?>
+    </div>
+    <div style="margin-left:10px; width: 100%;">
+        <?php echo $this->getChildHtml('shippingAddress'); ?>
+    </div>
+</div>
+
+<div style="width: 49%; float: left;">
+    <?php echo $this->getChildHtml('paymentMethod'); ?>
+</div>
+
+<div style="width: 49%; float: right;">
+    <?php echo $this->getChildHtml('shippingMethod'); ?>
+</div>
+
+<div>
+    <?php echo $this->getChildHtml('orderTotal'); ?>
+</div>
+
