@@ -44,41 +44,46 @@ class Ccc_Vendor_Adminhtml_Request_EditController extends Mage_Adminhtml_Control
     {
         try {
             $product = $this->_initProduct();
-            $catalogProduct = Mage::getModel('catalog/product')
-                ->loadByAttribute('sku', $product->getSku());
-
-            if (!$catalogProduct->getId()) {
-                throw new Exception("Invalid product id.");
+            if($product->getVendorProductApproved() == Ccc_Vendor_Model_Product_Request::REQUEST_APPROVED){
+                $this->_getSession()->addSuccess('Product already approved.');
             }
-                
-            $data = $product->getData();
-            if (array_key_exists('entity_id', $data)) {
-                unset($data['entity_id']);
+            else{
+                $catalogProduct = Mage::getModel('catalog/product')
+                    ->loadByAttribute('sku', $product->getSku());
+
+                if (!$catalogProduct->getId()) {
+                    throw new Exception("Invalid product id.");
+                }
+                    
+                $data = $product->getData();
+                if (array_key_exists('entity_id', $data)) {
+                    unset($data['entity_id']);
+                }
+
+                if (array_key_exists('entity_type', $data)) {
+                    unset($data['entity_type']);
+                }
+
+                if (array_key_exists('attribute_set_id', $data)) {
+                    unset($data['attribute_set_id']);
+                }
+
+                $catalogProduct->addData($data);
+                $catalogProduct->save();
+
+                $product->setVendorProductRequestStatus(Ccc_Vendor_Model_Product_Request::REQUEST_EDIT)
+                    ->setVendorProductApproved(Ccc_Vendor_Model_Product_Request::REQUEST_APPROVED);
+                $product->save();
+
+                $request = Mage::getModel('vendor/product_request')
+                    ->setVendorId($product->getVendorId())
+                    ->setVendorProductId($product->getId())
+                    ->setCatalogProductId($catalogProduct->getId())
+                    ->setRequestType($product->getVendorProductRequestStatus().'/'.$product->getVendorProductApproved());
+                $request->save();
+
+                $this->_getSession()->addSuccess('New Product successfully saved.');
             }
-
-            if (array_key_exists('entity_type', $data)) {
-                unset($data['entity_type']);
-            }
-
-            if (array_key_exists('attribute_set_id', $data)) {
-                unset($data['attribute_set_id']);
-            }
-
-            $catalogProduct->addData($data);
-            $catalogProduct->save();
-
-            $product->setVendorProductRequestStatus(Ccc_Vendor_Model_Product_Request::REQUEST_EDIT)
-                ->setVendorProductApproved(Ccc_Vendor_Model_Product_Request::REQUEST_APPROVED);
-            $product->save();
-
-            $request = Mage::getModel('vendor/product_request')
-                ->setVendorId($product->getVendorId())
-                ->setVendorProductId($product->getId())
-                ->setCatalogProductId($catalogProduct->getId())
-                ->setRequestType($product->getVendorProductRequestStatus().'/'.$product->getVendorProductApproved());
-            $request->save();
-
-            $this->_getSession()->addSuccess('New Product successfully saved.');
         } 
         catch (Exception $e) {
             $this->_getSession()->addError($e->getMessage());
