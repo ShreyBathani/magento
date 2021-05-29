@@ -1,6 +1,6 @@
 <?php $groupAttributes = $this->getGroupAttributes(); ?>
 
-<form method="post" action="<?php echo $this->getSaveUrl() ?>" enctype="multipart/form-data">
+<form method="post" id="productForm" action="<?php echo $this->getSaveUrl() ?>" enctype="multipart/form-data">
 
     <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
 
@@ -21,7 +21,7 @@
     
     <div class="buttons-set">
         <!-- <p class="back-link"><a href="<?php //echo $this->escapeUrl($this->getBackUrl()) ?>" class="back-link"><small>&laquo; </small><?php //echo $this->__('Back') ?></a></p> -->
-        <button type="submit" title="<?php echo $this->quoteEscape($this->__('Save')) ?>" class="button"><span><span><?php echo $this->__('Save') ?></span></span></button>
+        <button type="button" onclick="return checkDetails()" title="<?php echo $this->quoteEscape($this->__('Save')) ?>" class="button"><span><span><?php echo $this->__('Save') ?></span></span></button>
     </div>
 
 </form>
@@ -44,5 +44,36 @@
         document.getElementById(cityName).style.display = "block";
         evt.currentTarget.className += " active";
     }
+
+function checkDetails() {
+    flag = 0;
+    jQuery("input,select,textarea").each(function() {
+        if (jQuery(this).attr("id") == 'required') {
+            if (jQuery(this).val() == "" || jQuery(this).val() == undefined) {
+                //ptag = jQuery(this).parent().prev().children()[0];
+                ptag = jQuery(this).parent().children()[0];
+                console.log(ptag);
+                alert("Please Fill " + jQuery(ptag).text().trim().slice(1, -1) + " value");
+                flag = 1;
+                return false;
+            }
+        }
+    });
+    jQuery("input").each(function() {
+        if (jQuery(this).attr("type") == 'number') {
+            if (jQuery(this).val() < 0) {
+                ptag = jQuery(this).parent().children()[0];
+                alert(jQuery(ptag).text().trim().slice(1, -1) + " Value must be positive value ");
+                flag = 1;
+                return false;
+            }
+        }
+    });
+    if (flag) {
+        return false;
+    } else {
+        jQuery("#productForm").submit();
+    }
+}
     
 </script>

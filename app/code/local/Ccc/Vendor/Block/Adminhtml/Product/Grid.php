@@ -51,6 +51,24 @@ class Ccc_Vendor_Block_Adminhtml_Product_Grid extends Mage_Adminhtml_Block_Widge
             $adminStore
         );
 
+        $collection->joinAttribute(
+            'catalog_product_id',
+            'vendor_product/catalog_product_id',
+            'entity_id',
+            null,
+            'left',
+            $adminStore
+        );
+
+        $collection->joinAttribute(
+            'vendor_id',
+            'vendor_product/vendor_id',
+            'entity_id',
+            null,
+            'left',
+            $adminStore
+        );
+
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
@@ -76,6 +94,20 @@ class Ccc_Vendor_Block_Adminhtml_Product_Grid extends Mage_Adminhtml_Block_Widge
             'header' => Mage::helper('vendor')->__('SKU'),
             'width'  => '50px',
             'index'  => 'sku',
+        ));
+
+        $this->addColumn('catalog_product_id',
+        array(
+            'header' => Mage::helper('vendor')->__('Catalog Product Id'),
+            'width'  => '50px',
+            'index'  => 'catalog_product_id',
+        ));
+
+        $this->addColumn('vendor_id',
+        array(
+            'header' => Mage::helper('vendor')->__('Vendor Id'),
+            'width'  => '50px',
+            'index'  => 'vendor_id',
         ));
 
         parent::_prepareColumns();

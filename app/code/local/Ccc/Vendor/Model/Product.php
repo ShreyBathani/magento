@@ -55,4 +55,9 @@ class Ccc_Vendor_Model_Product extends Mage_Core_Model_Abstract
         }
         return false;
     }
+
+    public function loadBySku($productSku)
+    {
+        return $this->_getResource()->loadBySku($productSku);
+    }
 }

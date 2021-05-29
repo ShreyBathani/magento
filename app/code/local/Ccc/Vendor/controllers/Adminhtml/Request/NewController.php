@@ -81,7 +81,8 @@ class Ccc_Vendor_Adminhtml_Request_NewController extends Mage_Adminhtml_Controll
                 $catalogProduct->save();
 
                 $product->setVendorProductRequestStatus(Ccc_Vendor_Model_Product_Request::REQUEST_ADD)
-                    ->setVendorProductApproved(Ccc_Vendor_Model_Product_Request::REQUEST_APPROVED);
+                    ->setVendorProductApproved(Ccc_Vendor_Model_Product_Request::REQUEST_APPROVED)
+                    ->setCatalogProductId($catalogProduct->getId());
                 $product->save();
 
                 $request = Mage::getModel('vendor/product_request')

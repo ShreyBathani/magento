@@ -7,7 +7,7 @@ die; */
 <div class="page-title">
     <h3><?php echo $this->__('Manage Products') ?></h3>
 </div>
-
+<?php echo $this->getMessagesBlock()->toHtml() ?>
 <div class="buttons-set">
     <a href="<?php echo $this->getAddNewUrl(); ?>" class="button">Add New</a>
 </div>
@@ -20,11 +20,12 @@ die; */
             <th>SKU</th>
             <th>Price</th>
             <th>Weight</th>
+            <th>Status</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
-        <?php if($vendorProducts): ?>
+        <?php if($vendorProducts->getData()): ?>
         <?php foreach($vendorProducts as $vendorProduct):?>
         <tr>
             <td><?php echo $vendorProduct->getEntityId(); ?></td>
@@ -32,13 +33,14 @@ die; */
             <td><?php echo $vendorProduct->getSku(); ?></td>
             <td><?php echo $vendorProduct->getPrice(); ?></td>
             <td><?php echo $vendorProduct->getWeight(); ?></td>
+            <td><?php echo $vendorProduct->getVendorProductApproved(); ?></td>
             <td><a class="button" href="<?php echo $this->getEditUrl($vendorProduct->getEntityId()); ?>">Edit</a>
             <a class="button" href="<?php echo $this->getDeleteUrl($vendorProduct->getEntityId()); ?>">Delete</a></td>
         </tr>
         <?php endforeach; ?>
         <?php else: ?>
         <tr>
-            <td colspan="3">No Products Available</td>
+            <td colspan="7">No Products Available</td>
         </tr>
         <?php endif; ?>
     </tbody>
