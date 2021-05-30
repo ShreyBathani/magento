@@ -31,6 +31,7 @@
                 <active>1</active>
                 <model>demo1/carrier</model>
                 <title>Express Delivery</title>
+                <price>4.99</price>
                 <sort_order>10</sort_order>
                 <sallowspecific>0</sallowspecific>
             </demo1>
