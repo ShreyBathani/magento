@@ -1,5 +1,5 @@
 <?php $methods = $this->getPayemntMethodTitle(); ?>
-<?php $paymentCode = $this->getPaymentCode(); ?>
+<?php $paymentCode = $this->getCart()->getPaymentMethodCode(); ?>
 
 <div class="entry-edit">
     <span class="nowrap">

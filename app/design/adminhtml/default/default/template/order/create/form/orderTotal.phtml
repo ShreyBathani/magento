@@ -1,5 +1,5 @@
 <?php $cart = $this->getCart(); ?>
-<?php 
+<?php //echo "<pre>"; print_r($cart->getData()); die;
 $grandTotal = 0.00 + $cart->getTotal();
 if($cart->getShippingAmount()){
     $grandTotal += $cart->getShippingAmount();

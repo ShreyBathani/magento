@@ -2,6 +2,8 @@
 
 class Ccc_Order_Block_Adminhtml_Order_Create_Form_OrderItems_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
+    protected $cart = null;
+
     public function __construct() {
         $this->setId('order_create_form_orderItems_grid');
         $this->setDefaultDir('DESC');
@@ -9,16 +11,24 @@ class Ccc_Order_Block_Adminhtml_Order_Create_Form_OrderItems_Grid extends Mage_A
         $this->setUseAjax(true);
         parent::__construct();
     }
+    
+    public function setCart(Ccc_Order_Model_Cart $cart)
+    {
+        $this->cart = $cart;
+        return $this;
+    }
 
     public function getCart()
     {
-        return Mage::registry('ccc_cart');
+        if (!$this->cart) {
+            Mage::throwException(Mage::helper('order')->__('Cart Is not set.'));
+        }
+        return $this->cart;
     }
 
     public function _prepareCollection()
     {
-        $collection = Mage::getModel('order/cart_item')->getCollection();
-        $collection->getSelect()->where('cart_id = ?', $this->getCart()->getId());
+        $collection = $this->getCart()->getItems();
         $this->setCollection($collection);
         parent::_prepareCollection();
     }

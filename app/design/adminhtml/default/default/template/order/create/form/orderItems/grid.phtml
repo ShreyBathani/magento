@@ -1,8 +1,8 @@
 <?php
 $buttons = $this->getButtonsHtml();
-$collection = $this->getCollection();
+//$items = $this->getCollection();
 $columns = $this->getColumns();
-//echo "<pre>";
+$items = $this->getCart()->getItems();
 
 ?>
 
@@ -24,8 +24,8 @@ $columns = $this->getColumns();
                 </tr>
             </thead>
             <tbody>
-            <?php if($collection->getData()): ?>
-            <?php foreach ($collection as $row): ?>
+            <?php if($items->getData()): ?>
+            <?php foreach ($items as $row): ?>
                 <tr title="#">
                     <td class=" "> <?php echo $row->getName() ?> </td>
                     <td class=" "> <?php echo $row->getSku() ?> </td>
@@ -33,7 +33,7 @@ $columns = $this->getColumns();
                     <td class=" "> <input type="number" step="any" required min="1" required name="data[<?php echo $row->getId() ?>][price]" value="<?php echo $row->getPrice() ?>" class="input-text"> </td>
                     <td class="a-center "><input type="number" min="0" required required name="data[<?php echo $row->getId() ?>][quantity]" value="<?php echo $row->getQuantity() ?>" class="input-text"></td>
                     <td class=" "> <strong><?php echo ($row->getPrice()*$row->getQuantity()) ?> </strong></td>
-                    <td class=" "><button title="Delete" type="button" class="scalable" onclick="setLocation('<?php echo $this->getUrl('*/*/deleteItem', ['item_id' => $row->getId()]) ?>')"><span>Delete</span></button></td>
+                    <td class=" "><button title="Delete" type="button" class="scalable" onclick="setLocation('<?php echo $this->getUrl('*/*/deleteItem', ['_current' => true, 'item_id' => $row->getId()]) ?>')"><span>Delete</span></button></td>
                 </tr>
             <?php endforeach; ?>
             <?php else: ?>

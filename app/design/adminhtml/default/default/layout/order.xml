@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layout>
-    <add_style>
-        <reference name="head">
-            <action method="addItem">
-                <type>skin_css</type>
-                <name>css/bootstrap.min.css</name>
+    <add_ajax>
+        <reference name="head">        
+            <action method="addJs">
+                <file>ccc/mage.js</file>
             </action>
-            
-            <action method="addItem">
-                <type>skin_js</type>
-                <name>js/bootstrap.min.js</name>
+            <action method="addJs">
+                <file>ccc/jquery-3.6.0.min.js</file>
             </action>
         </reference>
-    </add_style>
+    </add_ajax>
     <adminhtml_order_create_index>
+        <!-- <update handle="add_ajax"></update> -->
         <reference name="content">
             <block type="order/adminhtml_order_create_customer" name="customer"></block>
         </reference>
     </adminhtml_order_create_index>
 
     <adminhtml_order_create_new>
-        <!-- <update handle="add_style"></update> -->
-        <reference name="root">
-            <block type="order/adminhtml_order_create_form" template="order/create/form.phtml" name="content">
+        <!-- <update handle="add_ajax"></update> -->
+        <reference name="content">
+            <block type="order/adminhtml_order_create_form" template="order/create/form.phtml" name="main">
                 <block type="order/adminhtml_order_create_form_product" template="order/create/form/product.phtml" name="product">
                     <block type="order/adminhtml_order_create_form_product_grid" name="productGrid" />
                 </block>

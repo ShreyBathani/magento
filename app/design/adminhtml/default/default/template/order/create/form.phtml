@@ -1,9 +1,4 @@
-<!-- <script type="text/javascript">
-    var order = new AdminOrder(<?php //echo $this->getOrderDataJson() ?>);
-    order.setLoadBaseUrl('<?php //echo $this->getLoadBlockUrl() ?>');
-    var payment = {};
-    payment.switchMethod = order.switchPaymentMethod.bind(order);
-</script> -->
+<?php $cart = $this->getCart(); ?>
 <div style="float: left">
     <h3><?php echo $this->getHeaderText(); ?></h3>
 </div>
@@ -17,39 +12,31 @@
 </div>
 
 <div>
-    <?php echo $this->getChildHtml('orderItems'); ?>
+    <?php echo $this->getChild('orderItems')->setCart($cart)->toHtml(); ?>
 </div>
 
 <div>
-    <?php echo $this->getChildHtml('accountInfo'); ?>
+    <?php echo $this->getChild('accountInfo')->setCart($cart)->toHtml(); ?>
 </div>
-
-<!-- <div style="width: 49%; float: left;">
-    <?php //echo $this->getChildHtml('billingAddress'); ?>
-</div>
-
-<div style="width: 49%; float: right;">
-    <?php //echo $this->getChildHtml('shippingAddress'); ?>
-</div> -->
 
 <div style=" display: flex; margin-top:20px;">
     <div style="margin-right:10px; width: 100%;">
-        <?php echo $this->getChildHtml('billingAddress'); ?>
+        <?php echo $this->getChild('billingAddress')->setCart($cart)->toHtml(); ?>
     </div>
     <div style="margin-left:10px; width: 100%;">
-        <?php echo $this->getChildHtml('shippingAddress'); ?>
+        <?php echo $this->getChild('shippingAddress')->setCart($cart)->toHtml(); ?>
     </div>
 </div>
 
 <div style="width: 49%; float: left;">
-    <?php echo $this->getChildHtml('paymentMethod'); ?>
+    <?php echo $this->getChild('paymentMethod')->setCart($cart)->toHtml(); ?>
 </div>
 
 <div style="width: 49%; float: right;">
-    <?php echo $this->getChildHtml('shippingMethod'); ?>
+    <?php echo $this->getChild('shippingMethod')->setCart($cart)->toHtml(); ?>
 </div>
 
 <div>
-    <?php echo $this->getChildHtml('orderTotal'); ?>
+    <?php echo $this->getChild('orderTotal')->setCart($cart)->toHtml(); ?>
 </div>
 

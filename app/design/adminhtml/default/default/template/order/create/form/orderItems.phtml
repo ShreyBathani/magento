@@ -1,3 +1,5 @@
+<?php $cart = $this->getCart(); ?>
+
 <div class="entry-edit">
     <form action="<?php echo $this->getFormUrl() ?>" id="cart_item" method="POST">
     <?php echo $this->getBlockHtml('formkey'); ?>
@@ -6,7 +8,7 @@
         <h4 class="fieldset-legend <?php echo ($this->getHeaderCssClass()) ? $this->getHeaderCssClass().' icon-head' : '' ?>"><?php echo $this->getHeaderText() ?></h4>
     </div>
     <div class="fieldset">
-        <?php echo $this->getChildHtml('orderItemsGrid', true, true) ?>
+        <?php echo $this->getChild('orderItemsGrid')->setCart($cart)->toHtml(); ?>
     </div>
     </form>
 </div>

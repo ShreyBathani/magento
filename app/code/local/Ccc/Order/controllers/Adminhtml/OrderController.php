@@ -20,14 +20,14 @@ class Ccc_Order_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Acti
     {      
         try {
             $cart = $this->getCart();
-            $customerId = $this->getRequest()->getParam('id');
+            //$customerId = $this->getRequest()->getParam('id');
             if ($cart->getTotal() == 0) {
                 throw new Exception("No Items Avaiable in your Cart");
             }
-            if (!$cart->getBillingAddress($this->_getSession()->getData('ccc_cart')->getId(), $customerId)->getState()) {
+            if (!$cart->getBillingAddress()->getData()) {
                 throw new Exception("Please Enter Billing Address");
             }
-            if (!$cart->getShippingAddress($this->_getSession()->getData('ccc_cart')->getId(), $customerId)->getState()) {
+            if (!$cart->getShippingAddress()->getData()) {
                 throw new Exception("Please Enter Shipping Address");
             }
             if (!$cart->getPaymentMethodCode()) {
@@ -50,17 +50,15 @@ class Ccc_Order_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Acti
 
     public function getCart()
     {
-        $cart = $this->_getSession()->getData('ccc_cart');
-        $cartId = $cart->getId();
-        $cart = Mage::getModel('order/cart');
-        if ($cartId) {
-            $cart = $cart->load($cartId);
-            if (!$cart) {
-                throw new \Exception("No Cart Found!");
-            }
+        $customerId = $this->getRequest()->getParam('id');
+        $customer = Mage::getModel('customer/customer')->load($customerId);
+        if(!$customer->getId()) {
+            throw new Exception("Invalid Customer");
         }
-        if (!$cart) {
-            return false;
+            
+        $cart = Mage::getModel('order/cart')->load($customerId, 'customer_id');
+        if (!$cart->getData()) {
+            throw new Exception("No Cart Found!");
         }
         return $cart;
     }
@@ -89,9 +87,7 @@ class Ccc_Order_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Acti
 
     public function saveOrderItem($order)
     {
-        $cart = $this->getCart();
-        $cartItems = Mage::getModel('order/cart_item')->getCollection()
-            ->addFieldToFilter('cart_id' , ['eq' => $cart->getId()]);
+        $cartItems = $this->getCart()->getItems();
 
         foreach ($cartItems as $cartItem) {
             $orderItem = Mage::getModel('order/order_item');
@@ -111,14 +107,13 @@ class Ccc_Order_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Acti
     public function saveOrderAddresses($order)
     {
         $cart = $this->getCart();
-        $cartAddresses = Mage::getModel('order/cart_address')->getCollection()
-            ->addFieldToFilter('cart_id' , ['eq' => $cart->getId()]);
+        $cartAddresses = $cart->getAddresses();
 
         foreach ($cartAddresses as $cartAddress) {
             $orderAddress = Mage::getModel('order/order_address');
 
             $orderAddress->setOrderId($order->getId())
-                ->setCustomerId($cart->getCustomerId())
+                ->setCustomerId($order->getCustomerId())
                 ->setFirstName($cartAddress->getFirstName())
                 ->setLastName($cartAddress->getLastName())
                 ->setAddressType($cartAddress->getAddressType())
@@ -135,19 +130,15 @@ class Ccc_Order_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Acti
     {
         $cart = $this->getCart();
 
-        $cartItems = Mage::getModel('order/cart_item')->getCollection()
-            ->addFieldToFilter('cart_id' , ['eq' => $cart->getId()]);
-
+        $cartItems = $cart->getItems();
         foreach ($cartItems as $cartItem) {
             $cartItem->delete();
         }
 
-        $cartAddresses = Mage::getModel('order/cart_address')->getCollection()
-            ->addFieldToFilter('cart_id' , ['eq' => $cart->getId()]);
-        
+        $cartAddresses = $cart->getAddresses();
         foreach ($cartAddresses as $cartAddress) {
             $cartAddress->delete();
         }
-        $cart->delete($cart->cartId);
+        $cart->delete();
     }
 }
