@@ -1,0 +1,42 @@
+<div id="messageHtml"></div>
+<div id="contentHtml">
+<?php $order = $this->getOrder(); ?>
+<div style="float: left">
+    <h3>Order Details</h3>
+</div>
+
+<div style="float: right">
+<button title="Submit Order" type="button" class="scalable back" onclick="setLocation('<?php echo $this->getUrl('*/order/') ?>')"><span><span><span>Back</span></span></span></button>
+</div>
+<br><br>
+
+<div>
+    <?php echo $this->getChild('orderItems')->setOrder($order)->toHtml(); ?>
+</div>
+
+<div>
+    <?php echo $this->getChild('accountInfo')->setOrder($order)->toHtml(); ?>
+</div>
+
+<div style=" display: flex; margin-top:20px;">
+    <div style="margin-right:10px; width: 100%;">
+        <?php echo $this->getChild('billingAddress')->setOrder($order)->toHtml(); ?>
+    </div>
+    <div style="margin-left:10px; width: 100%;">
+        <?php echo $this->getChild('shippingAddress')->setOrder($order)->toHtml(); ?>
+    </div>
+</div>
+
+<div style="width: 49%; float: left;">
+    <?php echo $this->getChild('paymentMethod')->setOrder($order)->toHtml(); ?>
+</div>
+
+<div style="width: 49%; float: right;">
+    <?php echo $this->getChild('shippingMethod')->setOrder($order)->toHtml(); ?>
+</div>
+
+<div>
+    <?php echo $this->getChild('orderTotal')->setOrder($order)->toHtml(); ?>
+</div>
+
+</div>

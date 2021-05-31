@@ -66,8 +66,9 @@ class Ccc_Order_Block_Adminhtml_Order_Create_Form_Product_Grid extends Mage_Admi
         $this->getMassactionBlock()->setFormFieldName('product');
 
         $this->getMassactionBlock()->addItem('Add To Cart', array(
-             'label'=> Mage::helper('order')->__('Add To Cart'),
-             'url'  => $this->getUrl('*/*/addItemsToCart', array('_current'=>true)),
+            'label'=> Mage::helper('order')->__('Add To Cart'),
+            'url'  => $this->getUrl('*/*/addItemsToCart', array('_current'=>true)),
+            'selected' => true,
         ));
         return $this;
     }

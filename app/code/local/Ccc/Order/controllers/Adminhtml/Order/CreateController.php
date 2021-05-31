@@ -47,7 +47,7 @@ class Ccc_Order_Adminhtml_Order_CreateController extends Mage_Adminhtml_Controll
 		return $cart;
 	}
 
-    public function newAction()
+    public function neworderAction()
     {
         try{
             $cart = $this->getCart();
@@ -65,6 +65,47 @@ class Ccc_Order_Adminhtml_Order_CreateController extends Mage_Adminhtml_Controll
             $this->_redirect('*/*/');
         }
     }
+    
+    public function newAction()
+    {
+        try{
+            $cart = $this->getCart();
+            $this->updateCartItemPrice();
+            $this->updateCartTotal($cart);
+            $this->loadLayout();
+            $this->getLayout()->getBlock('main')->setCart($cart);
+            $this->_setActiveMenu('order');
+            $this->_title('New Order');
+            $block = $this->getLayout()->getBlock('content')->toHtml();
+            $message = $this->getLayout()->getBlock('messages')->toHtml();
+            $this->makeResponse($block, $message);
+            //$this->renderLayout();
+            
+        }
+        catch(Exception $e){
+            $this->_getSession()->addError($e->getMessage());
+            $this->_redirect('*/*/');
+        }
+    }
+
+    protected function makeResponse($block,$message = null){
+        $response = [
+            'status' => 'success',
+            'message' =>'this is grid action.',
+            'element' =>[
+                [
+                    'selector' =>'#contentHtml',
+                    'html' =>$block
+                ],
+                [
+                    'selector' =>'#messageHtml',
+                    'html' =>$message
+                ]
+            ]
+        ];
+		header("Content-Type: application/json");
+		echo json_encode($response);
+	}
 
     public function addItemsToCartAction()
     {   
@@ -91,7 +132,7 @@ class Ccc_Order_Adminhtml_Order_CreateController extends Mage_Adminhtml_Controll
         }
         //$this->getResponse()->clearHeaders()->setHeader('Content-type','application/json',true);
         //$this->getResponse()->setBody($this->getLayout()->createBlock('main')->toHtml());
-        $this->_redirect('*/*/new', ['_current' => true]);
+        $this->_redirect('*/*/neworder', ['_current' => true]);
     }
 
     public function updateCartAction()
@@ -161,6 +202,7 @@ class Ccc_Order_Adminhtml_Order_CreateController extends Mage_Adminhtml_Controll
             if (!($itemId = (int) $this->getRequest()->getParam('item_id'))){
                 throw new Exception('Invalid Id');
             }
+            
             $cartItem->load($itemId);
             if (!$cartItem->getData()) {
                 throw new Exception('Item does not exist');

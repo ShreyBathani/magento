@@ -2,23 +2,29 @@
 <layout>
     <add_ajax>
         <reference name="head">        
-            <action method="addJs">
-                <file>ccc/mage.js</file>
+            <action method="addItem">
+                <type>js</type>
+                <name>ccc/jquery-3.6.0.min.js</name>
             </action>
-            <action method="addJs">
-                <file>ccc/jquery-3.6.0.min.js</file>
+            <action method="addItem">
+                <type>js</type>
+                <name>ccc/noconflict.js</name>
+            </action>
+            <action method="addItem">
+                <type>js</type>
+                <name>ccc/mage.js</name>
             </action>
         </reference>
     </add_ajax>
     <adminhtml_order_create_index>
-        <!-- <update handle="add_ajax"></update> -->
+        <update handle="add_ajax"></update>
         <reference name="content">
             <block type="order/adminhtml_order_create_customer" name="customer"></block>
         </reference>
     </adminhtml_order_create_index>
 
     <adminhtml_order_create_new>
-        <!-- <update handle="add_ajax"></update> -->
+        <update handle="add_ajax"></update>
         <reference name="content">
             <block type="order/adminhtml_order_create_form" template="order/create/form.phtml" name="main">
                 <block type="order/adminhtml_order_create_form_product" template="order/create/form/product.phtml" name="product">
@@ -46,4 +52,53 @@
             </block>
         </reference>
     </adminhtml_order_create_new>
+    <adminhtml_order_create_neworder>
+        <update handle="add_ajax"></update>
+        <reference name="content">
+            <block type="order/adminhtml_order_create_form" template="order/create/form.phtml" name="main">
+                <block type="order/adminhtml_order_create_form_product" template="order/create/form/product.phtml" name="product">
+                    <block type="order/adminhtml_order_create_form_product_grid" name="productGrid" />
+                </block>
+                <block type="order/adminhtml_order_create_form_orderItems" template="order/create/form/orderItems.phtml" name="orderItems">
+                    <block type="order/adminhtml_order_create_form_orderItems_grid" template="order/create/form/orderItems/grid.phtml" name="orderItemsGrid" />
+                </block>
+                <block type="order/adminhtml_order_create_form_accountInfo" template="order/create/form/accountInfo.phtml" name="accountInfo">
+                    <block type="order/adminhtml_order_create_form_accountInfo_form" template="order/create/form/accountInfo/form.phtml" name="accountInfoForm" />
+                </block>
+                <block type="order/adminhtml_order_create_form_billingAddress" template="order/create/form/billingAddress.phtml" name="billingAddress">
+                    <block type="order/adminhtml_order_create_form_billingAddress_form" template="order/create/form/billingAddress/form.phtml" name="billingAddressForm" />
+                </block>
+                <block type="order/adminhtml_order_create_form_shippingAddress" template="order/create/form/shippingAddress.phtml" name="shippingAddress">
+                    <block type="order/adminhtml_order_create_form_shippingAddress_form" template="order/create/form/shippingAddress/form.phtml" name="shippingAddressForm" />
+                </block>
+                <block type="order/adminhtml_order_create_form_paymentMethod" template="order/create/form/paymentMethod.phtml" name="paymentMethod">
+                    <block type="order/adminhtml_order_create_form_paymentMethod_form" template="order/create/form/paymentMethod/form.phtml" name="paymentMethodForm" />
+                </block>
+                <block type="order/adminhtml_order_create_form_shippingMethod" template="order/create/form/shippingMethod.phtml" name="shippingMethod">
+                    <block type="order/adminhtml_order_create_form_shippingMethod_form" template="order/create/form/shippingMethod/form.phtml" name="shippingMethodForm" />
+                </block>
+                <block type="order/adminhtml_order_create_form_orderTotal" template="order/create/form/orderTotal.phtml" name="orderTotal"/>
+            </block>
+        </reference>
+    </adminhtml_order_create_neworder>
+    <adminhtml_order_view>
+        <update handle="add_ajax"></update>
+        <reference name="content">
+            <block type="order/adminhtml_order_view_form" template="order/view/form.phtml" name="view">
+                <block type="order/adminhtml_order_view_form_orderItems" template="order/view/form/orderItems.phtml" name="orderItems">
+                    <block type="order/adminhtml_order_view_form_orderItems_grid" template="order/view/form/orderItems/grid.phtml" name="orderItemsGrid" />
+                </block>
+                <block type="order/adminhtml_order_view_form_accountInfo" template="order/view/form/accountInfo.phtml" name="accountInfo"></block>
+                <block type="order/adminhtml_order_view_form_billingAddress" template="order/view/form/billingAddress.phtml" name="billingAddress">
+                    <block type="order/adminhtml_order_view_form_billingAddress_form" template="order/view/form/billingAddress/form.phtml" name="billingAddressForm" />
+                </block>
+                <block type="order/adminhtml_order_view_form_shippingAddress" template="order/view/form/shippingAddress.phtml" name="shippingAddress">
+                    <block type="order/adminhtml_order_view_form_shippingAddress_form" template="order/view/form/shippingAddress/form.phtml" name="shippingAddressForm" />
+                </block>
+                <block type="order/adminhtml_order_view_form_paymentMethod" template="order/view/form/paymentMethod.phtml" name="paymentMethod"></block>
+                <block type="order/adminhtml_order_view_form_shippingMethod" template="order/view/form/shippingMethod.phtml" name="shippingMethod"></block>
+                <block type="order/adminhtml_order_view_form_orderTotal" template="order/view/form/orderTotal.phtml" name="orderTotal"/>
+            </block>
+        </reference>
+    </adminhtml_order_view>
 </layout>

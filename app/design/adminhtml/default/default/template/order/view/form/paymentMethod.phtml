@@ -1,0 +1,21 @@
+<div class="entry-edit">
+    <form action="<?php echo $this->getFormUrl() ?>" id="paymentmethod_form" method="POST">
+        <?php echo $this->getBlockHtml('formkey'); ?>
+        <div class="entry-edit-head">
+            <!-- <div style="float: right;"><button title="Save" type="button" class="scalable save" onclick="object.setForm(this).load()"><span><span><span>Save</span></span></span></button></div> -->
+            <h4 class="fieldset-legend <?php echo ($this->getHeaderCssClass()) ? $this->getHeaderCssClass() . ' icon-head' : '' ?>"><?php echo $this->getHeaderText() ?></h4>
+        </div>
+        <div class="fieldset">
+            <?php $paymentCode = $this->getOrder()->getPaymentMethodCode(); ?>
+            <?php $methods = $this->getPayemntMethodTitle(); ?>
+
+            <div class="entry-edit">
+                <span class="nowrap">
+                    <?php foreach ($methods as $key => $value) : ?>
+                        <?php if($key === $paymentCode){echo $value->getTitle();} ?>
+                    <?php endforeach; ?>
+                </span>
+            </div>
+        </div>
+    </form>
+</div>

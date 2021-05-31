@@ -7,7 +7,7 @@ class Ccc_Order_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget_G
         parent::__construct();
         $this->setId('order_grid');
         $this->setDefaultSort('order_id');
-        $this->setDefaultDir('ASC');
+        $this->setDefaultDir('DESC');
         $this->setSaveParametersInSession(true);
         $this->setUseAjax(true);
     }
@@ -71,10 +71,7 @@ class Ccc_Order_Block_Adminhtml_Order_Grid extends Mage_Adminhtml_Block_Widget_G
 
     public function getRowUrl($row)
     {
-        // if (Mage::getSingleton('admin/session')->isAllowed('order/order/actions/view')) {
-        //     return $this->getUrl('*/order/view', array('order_id' => $row->getId()));
-        // }
-        // return false;
+        return $this->getUrl('*/order/view', array('order_id' => $row->getId()));
     }
 
     public function getGridUrl()

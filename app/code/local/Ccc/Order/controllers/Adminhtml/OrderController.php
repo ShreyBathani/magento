@@ -42,7 +42,7 @@ class Ccc_Order_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Acti
         }
         catch(Exception $e){
             $this->_getSession()->addError($e->getMessage());
-            $this->_redirect('*/order_create/new', ['_current' => true]);
+            $this->_redirect('*/order_create/neworder', ['_current' => true]);
             return;
         }
         $this->_redirect('*/*/');
@@ -140,5 +140,14 @@ class Ccc_Order_Adminhtml_OrderController extends Mage_Adminhtml_Controller_Acti
             $cartAddress->delete();
         }
         $cart->delete();
+    }
+
+    public function viewAction()
+    {
+        $this->loadLayout();
+        $order_id = $this->getRequest()->getParam('order_id');
+        $order = Mage::getModel('order/order')->load($order_id);
+        $this->getLayout()->getBlock('view')->setOrder($order);
+        $this->renderLayout();
     }
 }

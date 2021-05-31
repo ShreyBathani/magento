@@ -1,9 +1,8 @@
 <?php
-$buttons = $this->getButtonsHtml();
+//$buttons = $this->getButtonsHtml();
 //$items = $this->getCollection();
 $columns = $this->getColumns();
-$items = $this->getCart()->getItems();
-
+$items = $this->getOrder()->getItems();
 ?>
 
 <div class="grid">
@@ -20,7 +19,6 @@ $items = $this->getCart()->getItems();
                         <th><span class="nobr"><a href="#" name="<?php echo $key ?>" title="asc" class="not-sort"><span class="sort-title"><?php echo $column['header'] ?></span></a></span></th>
                     <?php endforeach; ?>
                     <th><span class="nobr">Total</span></th>
-                    <th><span class="nobr">Delete</span></th>
                 </tr>
             </thead>
             <tbody>
@@ -30,15 +28,14 @@ $items = $this->getCart()->getItems();
                     <td class=" "> <?php echo $row->getName() ?> </td>
                     <td class=" "> <?php echo $row->getSku() ?> </td>
                     <td class=" "> <?php echo $row->getBasePrice() ?> </td>
-                    <td class=" "> <input type="number" step="any" required min="1" required name="data[<?php echo $row->getId() ?>][price]" value="<?php echo $row->getPrice() ?>" class="input-text"> </td>
-                    <td class="a-center "><input type="number" min="0" required required name="data[<?php echo $row->getId() ?>][quantity]" value="<?php echo $row->getQuantity() ?>" class="input-text"></td>
+                    <td class=" "> <?php echo $row->getPrice() ?> </td>
+                    <td class="a-center "><?php echo $row->getQuantity() ?></td>
                     <td class=" "> <strong><?php echo ($row->getPrice()*$row->getQuantity()) ?> </strong></td>
-                    <td class=" "><button title="Delete" type="button" class="scalable" onclick="object.setMethod('get').setUrl('<?php echo $this->getUrl('*/order_create/deleteItem', ['_current' => true, 'item_id' => $row->getId()]); ?>').load()"><span>Delete</span></button></td>
                 </tr>
             <?php endforeach; ?>
             <?php else: ?>
                 <tr>
-                    <td colspan="7" class="empty-text a-center"><?php echo $this->helper('order')->__('No record found') ?></td>
+                    <td colspan="6" class="empty-text a-center"><?php echo $this->helper('order')->__('No record found') ?></td>
                 </tr>
             <?php endif; ?>
             </tbody>
@@ -46,5 +43,3 @@ $items = $this->getCart()->getItems();
         </table>
     </div>
 </div>
-
-<!-- <button title="Delete" type="button" class="scalable" onclick="setLocation('<?php //echo $this->getUrl('*/*/deleteItem', ['_current' => true, 'item_id' => $row->getId()]) ?>')"><span>Delete</span></button> -->

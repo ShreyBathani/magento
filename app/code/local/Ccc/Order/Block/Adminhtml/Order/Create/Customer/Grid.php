@@ -7,7 +7,7 @@ class Ccc_Order_Block_Adminhtml_Order_Create_Customer_Grid extends Mage_Adminhtm
     {
         parent::__construct();
         $this->setId('order_create_customer_grid');
-        $this->setDefaultDir('DESC');
+        $this->setDefaultDir('ASC');
         $this->setDefaultSort('entity_id');
         $this->setSaveParametersInSession(true);
         $this->setUseAjax(true);
@@ -52,16 +52,16 @@ class Ccc_Order_Block_Adminhtml_Order_Create_Customer_Grid extends Mage_Adminhtm
             'width'     =>'120px',
             'index'     =>'billing_postcode',
         ));
+        $this->addColumn('billing_regione', array(
+            'header'    =>Mage::helper('sales')->__('State/Province'),
+            'width'     =>'100px',
+            'index'     =>'billing_regione',
+        ));
         $this->addColumn('billing_country_id', array(
             'header'    =>Mage::helper('sales')->__('Country'),
             'width'     =>'100px',
             'type'      =>'country',
             'index'     =>'billing_country_id',
-        ));
-        $this->addColumn('billing_regione', array(
-            'header'    =>Mage::helper('sales')->__('State/Province'),
-            'width'     =>'100px',
-            'index'     =>'billing_regione',
         ));
 
         $this->addColumn('store_name', array(
@@ -81,7 +81,7 @@ class Ccc_Order_Block_Adminhtml_Order_Create_Customer_Grid extends Mage_Adminhtm
 
     public function getRowUrl($row)
     {
-        return $this->getUrl('*/*/new', array('id'=>$row->getId()));
+        return $this->getUrl('*/*/neworder', array('id'=>$row->getId()));
     }
 
     public function getGridUrl()
