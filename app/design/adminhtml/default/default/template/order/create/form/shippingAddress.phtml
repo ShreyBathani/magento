@@ -2,7 +2,7 @@
 <form id="shippingaddress_form" action="<?php echo $this->getFormUrl() ?>" method="post">
     <?php echo $this->getBlockHtml('formkey'); ?>
     <div class="entry-edit-head">
-        <div style="float: right;"><button title="Save" type="button" class="scalable save"  onclick="object.setForm(this).load()"><span><span><span>Save</span></span></span></button></div>
+        <div style="float: right;"><button title="Save" type="button" id="shippingaddress_form_submit" class="scalable save"  onclick="checkShippingForm()"><span><span><span>Save</span></span></span></button></div>
         <h4 class="fieldset-legend <?php echo ($this->getHeaderCssClass()) ? $this->getHeaderCssClass().' icon-head' : '' ?>"><?php echo $this->getHeaderText() ?></h4>
     </div>
     <div class="fieldset">
@@ -33,5 +33,26 @@
             document.getElementById("shipping_country_id").disabled = false;
         }
     }
-    disabledFields(document.getElementById("save-in-shipping-address-book"));
+    disabledFields(document.getElementById("same_as_biling"));
+
+    function checkShippingForm() {
+        flag = 0;
+        checkbox = document.getElementById('same_as_biling');
+        if(checkbox.checked == false){
+            var fields = document.getElementsByClassName('shipping');
+            for(var i=0;i < fields.length;i++){
+                if(fields[i].value == "" || fields[i].value == undefined){
+                    alert("Please Fill " + fields[i].name + " value");
+                    flag = 1;
+                    return false;
+                }
+            }
+        }
+        if (flag) {
+            return false;
+        } else {
+            var button = document.getElementById('shippingaddress_form_submit');
+            object.setForm(button).load();
+        }
+    }
 </script>

@@ -3,7 +3,7 @@
 
 <div class="order-address" id="order-shipping_address_fields">
     <div class="order-save-in-address-book">
-        <input name="same_as_biling" type="checkbox" id="same-as-biling" onclick="return disabledFields(this)" value="1" <?php if ($shippingAddress->getSameAsBilling()) : ?>checked<?php endif; ?>>
+        <input name="same_as_biling" type="checkbox" id="same_as_biling" onclick="return disabledFields(this)" value="1" <?php if ($shippingAddress->getSameAsBilling()) : ?>checked<?php endif; ?>>
         <label for="same-as-biling">Same as Billing</label> &nbsp;&nbsp;&nbsp;&nbsp;
     </div>
     <div class="content">
@@ -13,44 +13,44 @@
                     <tr>
                         <td class="label"><label for="name">First Name <span class="required">*</span></label></td>
                         <td class="value">
-                            <input name="first_name" id="shipping_firstname" value="<?php echo $shippingAddress ->getFirstName() ?>" class=" required-entry input-text required-entry" type="text">
+                            <input name="first_name" id="shipping_firstname" value="<?php echo $shippingAddress ->getFirstName() ?>" class="shipping required-entry input-text required-entry" type="text">
                         </td>
                     </tr>
                     <tr>
                         <td class="label"><label for="name">Last Name <span class="required">*</span></label></td>
                         <td class="value">
-                            <input name="last_name" id="shipping_lastname" value="<?php echo $shippingAddress ->getLastName() ?>" class=" required-entry input-text required-entry" type="text">
+                            <input name="last_name" id="shipping_lastname" value="<?php echo $shippingAddress ->getLastName() ?>" class="shipping required-entry input-text required-entry" type="text">
                         </td>
                     </tr>
                     <tr>
                         <td class="label"><label for="address">Address <span class="required">*</span></label></td>
                         <td class="value">
-                            <div class="multi-input"><input id="shipping_address" name="address" value="<?php echo $shippingAddress->getAddress()  ?>" class="input-text required-entry" type="text">
+                            <div class="multi-input"><input id="shipping_address" name="address" value="<?php echo $shippingAddress->getAddress()  ?>" class="shipping input-text required-entry" type="text">
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td class="label"><label for="city">City <span class="required">*</span></label></td>
                         <td class="value">
-                            <input id="shipping_city" name="city" value="<?php echo $shippingAddress->getCity()  ?>" class=" required-entry input-text required-entry" type="text">
+                            <input id="shipping_city" name="city" value="<?php echo $shippingAddress->getCity()  ?>" class="shipping required-entry input-text required-entry" type="text">
                         </td>
                     </tr>
                     <tr>
                         <td class="label"><label for="state">State <span class="required">*</span></label></td>
                         <td class="value">
-                            <input id="shipping_state" name="state" value="<?php echo $shippingAddress->getState()  ?>" class=" required-entry input-text required-entry" type="text">
+                            <input id="shipping_state" name="state" value="<?php echo $shippingAddress->getState()  ?>" class="shipping required-entry input-text required-entry" type="text">
                         </td>
                     </tr>
                     <tr>
                         <td class="label"><label for="zipcode">Zipcode <span class="required">*</span></label></td>
                         <td class="value">
-                            <input id="shipping_zipcode" name="zipcode" value="<?php echo $shippingAddress->getZipcode()  ?>" class=" required-entry input-text required-entry" type="text">
+                            <input id="shipping_zipcode" name="zipcode" value="<?php echo $shippingAddress->getZipcode()  ?>" class="shipping required-entry input-text required-entry" type="text">
                         </td>
                     </tr>
                     <tr>
                         <td class="label"><label for="country_id">Country <span class="required">*</span></label></td>
                         <td class="value">
-                            <select id="shipping_country_id" name="country" class="required-entry required-entry select">
+                            <select id="shipping_country_id" name="country" class="shipping required-entry required-entry select">
                                 <?php foreach ($countries as $country) : ?>
                                     <option value="<?php echo $country['value'] ?>" <?php if ($country['value'] == $shippingAddress->getCountry()) : ?>selected<?php endif; ?>><?php echo $country['label'] ?></option>
                                 <?php endforeach; ?>
@@ -67,7 +67,7 @@
                                                                                                                                                                     ?>>
         <label for="save-in-shipping-address-book">Same as Billing</label> &nbsp;&nbsp;&nbsp;&nbsp; -->
 
-        <input name="save_in_shipping_address" type="checkbox" id="save-in-shipping-address-book" value="1">
+        <input name="save_in_shipping_address" type="checkbox" id="save_in_shipping_address" value="1">
         <label for="save-in-shipping-address-book">Save in address book</label>
     </div>
 
