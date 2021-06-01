@@ -4,7 +4,7 @@
 <div class="entry-edit">
     <span class="nowrap">
         <?php foreach ($methods as $key => $value) : ?>
-            <input type="radio" value="<?php echo $key ?>" <?php if($key == $paymentCode): ?> checked <?php endif; ?> required name="paymentMethod">
+            <input type="radio" value="<?php echo $key ?>" <?php if($key == $paymentCode): ?> checked <?php endif; ?> required name="paymentMethod" class="paymentMethod">
             <?php echo $value->getTitle(); ?><br>
         <?php endforeach; ?>
     </span>
